@@ -10,27 +10,22 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/glossom-dev/Adfurikun-SPM-Core.git",
-            exact: "4.4.0"
+            exact: "4.5.0-alpha.1"
+        ),
+        .package(
+            url: "https://github.com/InMobi/InMobiSDK-Swift-Package.git",
+            exact: "11.4.1"
         ),
     ],
     targets: [
-        .binaryTarget(
-            name: "InMobi",
-            url: "https://dl.inmobi.com/inmobi-sdk/IM/InMobi-iOS-SDK-11.3.0.zip",
-            checksum: "1dc4583ad8718845180903bfa6accc17c5248eca6d0aabbd43b9fb0dad1f58ce"
-        ),
         .target(
             name: "AdfurikunInMobi",
             dependencies: [
                 .product(name: "AdfurikunSDK", package: "Adfurikun-SPM-Core"),
-                "InMobi",
+                .product(name: "InMobiSDK", package: "InMobiSDK-Swift-Package")
             ],
             path: "Sources",
-            publicHeadersPath: ".",
-            linkerSettings: [
-                .linkedLibrary("sqlite3"),
-                .linkedFramework("WebKit"),
-            ]
+            publicHeadersPath: "."
         )
     ]
 )
